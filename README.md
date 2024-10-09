@@ -29,7 +29,7 @@ Directory Setup
 - and run 'npm install' again on the client directory.
 
 Run (EARLY DEVELOPMENT)
-
+- **For M-Series Mac only**: To run mongod manually as a background process using a config file, run: ```mongod --config /opt/homebrew/etc/mongod.conf --fork```
 - Run the backend in VScode with 'node index.js'.
 - Should output 'Connected to MongoDB' if the server is running.
 - Connect on a web-browser at localhost:3000.

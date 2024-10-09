@@ -30,22 +30,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3rem;
-  line-height: 0;
-}
-
-input{
-  width: 100%;
-  border: 2px solid #aaa;
-  border-radius: 4px;
-  margin: 4px 0;
-  outline: none;
-  padding: 6px;
-  box-sizing: border-box;
-  transition: 0.3s;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -67,13 +51,24 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.title-card {
-  padding: 20px;
-  box-sizing: border-box;
+h1 {
+  font-size: 3rem;
+  line-height: 0;
 }
-h1, h3 {
-  margin: 30px, 0;
-  margin-bottom: 20px;
+
+input{
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 4px 0;
+  outline: none;
+  padding: 6px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+#manager-header {
+
 }
 
 @media (prefers-color-scheme: light) {
