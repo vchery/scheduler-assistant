@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './EmployeeDashboard.css';
-
+import './Dashboard.css';
 
 // Format date as "Month Day, Year"
 const formatDate = (date) => {
@@ -126,7 +125,6 @@ const ScheduleTab = ({ shifts, scheduleDates, selectedDate, setSelectedDate }) =
     </div>
   );
 };
-
 
 const TimesheetTab = ({ shifts }) => {
   const [payPeriod, setPayPeriod] = useState([]);
