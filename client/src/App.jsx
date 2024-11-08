@@ -4,7 +4,7 @@ import Register from './Register'; //Register component
 import Login from './Login'; //Login component
 import Home from './pages/Home';
 import EmployeeDashboard from './pages/EmployeeDashboard';
-import ManagerDashboard from './pages/ManagerDashboard';
+import ManagerDashboard from './pages/ManagerDashboard.jsx';
 import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
 
