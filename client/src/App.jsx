@@ -5,6 +5,7 @@ import Login from './Login'; //Login component
 import Home from './pages/Home';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ManagerDashboard from './pages/ManagerDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/dashboard/:employeeId" element={<EmployeeDashboard />} />
           {/* Only routes to one Manager Dashboard for now */}
           <Route path="/dashboard/manager" element={<ManagerDashboard />} />
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
         </Routes>
       
       {/*<div>

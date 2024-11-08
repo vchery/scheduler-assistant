@@ -1,6 +1,6 @@
+import './ManagerDashboard.css';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './ManagerDashboard.css';
 import MonthlyCalendar from '../components/MonthlyCalendar.jsx';
 import Timesheet from "../components/Timesheet.jsx";
 
@@ -20,6 +20,44 @@ const DashboardTab = () => {
         <div className="dashboard-tab-container">
             <h2 className='dashboard-name'>Hello, {name}!</h2>
             <p className='dashboard-name'>It&apos;s {currTime} on {currDate}.</p>
+            <div className='card-row'>
+                <div className="col-xl-3 col-md-6">
+                    <div className="card bg-primary text-white mb-4">
+                        <div className="card-body">Primary Card</div>
+                        <div className="card-footer d-flex align-items-center justify-content-between">
+                            <a className="small text-white stretched-link" href="#">View Details</a>
+                            <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-3 col-md-6">
+                    <div className="card bg-warning text-white mb-4">
+                        <div className="card-body">Warning Card</div>
+                        <div className="card-footer d-flex align-items-center justify-content-between">
+                            <a className="small text-white stretched-link" href="#">View Details</a>
+                            <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-3 col-md-6">
+                    <div className="card bg-success text-white mb-4">
+                        <div className="card-body">Success Card</div>
+                        <div className="card-footer d-flex align-items-center justify-content-between">
+                            <a className="small text-white stretched-link" href="#">View Details</a>
+                            <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-3 col-md-6">
+                    <div className="card bg-danger text-white mb-4">
+                        <div className="card-body">Danger Card</div>
+                        <div className="card-footer d-flex align-items-center justify-content-between">
+                            <a className="small text-white stretched-link" href="#">View Details</a>
+                            <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
@@ -30,7 +68,7 @@ const ScheduleTab = () => {
         <div className="schedule-tab-container">
             <h1>Monthly Overview</h1>
             <h4>Here's the headcount for employees working within the next month</h4>
-            <MonthlyCalendar />
+            <MonthlyCalendar/>
         </div>
     );
 };
@@ -40,7 +78,7 @@ const TimesheetTab = () => {
         <div className="timesheet-tab">
             <h1>Weekly Timesheet</h1>
             <p>Here's an overview of the number of hours each employee has worked this week</p>
-            <Timesheet />
+            <Timesheet/>
         </div>
     );
 };

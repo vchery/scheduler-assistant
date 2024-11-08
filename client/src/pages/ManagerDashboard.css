@@ -1,4 +1,4 @@
-/*TODO: Adust dont based on screen size? */
+/*TODO: adjust content based on screen size? */
 .dashboard-container {
   display: flex;
   height: 100vh;
@@ -38,9 +38,6 @@
 
 
 .main-content {
-  margin-left: 150px;
-  padding: 50px;
-  /*width: calc(100% - 250px);*/
 
 }
 
