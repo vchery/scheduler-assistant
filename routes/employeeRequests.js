@@ -9,7 +9,7 @@ router.post('/new', async (req, res) => {
 
         // If time-off is provided, check for overlapping requests
         if (timeOffStart && timeOffEnd) {
-            if (timeOffStart >= timeOffEnd) {
+            if (timeOffStart > timeOffEnd) {
                 return res.status(400).send({ error: 'Invalid time-off range provided' });
             }
 
@@ -132,7 +132,7 @@ router.put('/:id', async (req, res) => {
             const employeeID = updateData.employeeID || existingEmployeeRequest.employeeID;// new ID or current
             const newStartTime = updateData.timeOffStart ? new Date(updateData.timeOffStart) : existingEmployeeRequest.timeOffStart;
             const newEndTime = updateData.timeOffEnd ? new Date(updateData.timeOffEnd) : existingEmployeeRequest.timeOffEnd;
-            
+
             if (newStartTime >= newEndTime) {
                 return res.status(400).send({ error: 'Invalid time-off range provided' });
             }
@@ -162,9 +162,9 @@ router.put('/:id', async (req, res) => {
             if (overlappingReq || encasingReq) {
                 return res.status(400).send({ error: 'Time-off overlaps with an existing request for this employee' });
             }
-            
+
         }
-        
+
         if (shiftToTradeID || desiredShiftID) {
             const duplicateReq = await EmployeeRequest.findOne({
                 _id: { $ne: employeeRequestID },  // Exclude the current request being updated

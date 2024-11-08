@@ -1,23 +1,23 @@
 /**
- * Punches: This component handles employee clock-in and clock-out functionality by updating the `punchIn` and `punchOut` attributes 
- * on the backend, tracking the actual start and end times of an employee's shift. 
+ * Punches: This component handles employee clock-in and clock-out functionality by updating the `punchIn` and `punchOut` attributes
+ * on the backend, tracking the actual start and end times of an employee's shift.
  * i.e: The component makes API calls to update the `punchIn` and `punchOut` values on the server when the employee punches in or out.
- * 
+ *
  * We considered two approaches to track an employee's clocked-in status:
- * 
+ *
  * Option 1: Track the employee's status using the `punchIn` and `punchOut` fields in the shift object.
  * Option 2: Add a separate "clocked status" attribute directly to the employee object.
- * 
+ *
  * We decided to go with Option 1 for these reasons:
- * 
+ *
  * 1. Avoiding Data Redundancy: Storing the clock-in status with the shift avoids keeping the same information in two places, which reduces the risk of data inconsistency.
- * 
+ *
  * 2. Future Extensibility: Storing clock-in and clock-out times within the shift makes it easier to calculate shift duration, overtime, and delays in the future, without requiring cross-referencing other data sources.
- * 
+ *
  * 3. Clear History: Each shift contains a complete record of when the employee clocked in and out, making it simple to track work history and analyze performance.
- * 
+ *
  * This approach allows the application to query the shift object to determine if the employee is currently clocked in or not (i.e., if `punchIn` is set and `punchOut` is still null, the employee is clocked in).
- * 
+ *
  */
 
 //TODO: Test overnight shifts
@@ -50,12 +50,12 @@ const Punches = ({ shifts }) => {
     const filteredShifts = sortedShifts.filter(shift => {
       const shiftStartTime = new Date(shift.startTime);
       const shiftEndTime = new Date(shift.endTime);
-      
+
       // Check if shift ends today but started yesterday i.e overnight shifts
       return (
-        (shiftStartTime.getDate() === currentTime.getDate() || shiftEndTime.getDate() === currentTime.getDate()) &&
-        (shiftStartTime.getMonth() === currentTime.getMonth()) &&
-        (shiftStartTime.getFullYear() === currentTime.getFullYear() || shiftEndTime.getFullYear() === currentTime.getFullYear())
+          (shiftStartTime.getDate() === currentTime.getDate() || shiftEndTime.getDate() === currentTime.getDate()) &&
+          (shiftStartTime.getMonth() === currentTime.getMonth()) &&
+          (shiftStartTime.getFullYear() === currentTime.getFullYear() || shiftEndTime.getFullYear() === currentTime.getFullYear())
       );
     });
 
@@ -135,87 +135,87 @@ const Punches = ({ shifts }) => {
   };
 
   return (
-    <Box className="punches-container">
-      <Typography variant="h4" gutterBottom>Punches</Typography>
+      <Box className="punches-container">
+        <Typography variant="h4" >Punches</Typography>
 
-      {punchStatus && (
-        <Chip
-          label={`Status: ${punchStatus}`}
-          color={punchStatus === 'Punched In' ? 'primary' : 'secondary'}
-          variant="outlined"
-          className="status-chip"
-        />
-      )}
+        {punchStatus && (
+            <Chip
+                label={`Status: ${punchStatus}`}
+                color={punchStatus === 'Punched In' ? 'primary' : 'secondary'}
+                variant="outlined"
+                className="status-chip"
+            />
+        )}
 
-      {/* Display Shift Details for today */}
-      {todayShift ? (
-        <Box className="shift-details">
-          <Typography variant="h6">Shift Details</Typography>
-          <Typography variant="body1">Shift Name: {todayShift.shiftName}</Typography>
-          <Typography variant="body1">Start Time: {new Date(todayShift.startTime).toLocaleString()}</Typography>
-          <Typography variant="body1">End Time: {new Date(todayShift.endTime).toLocaleString()}</Typography>
-          {/* Show message if the shift is complete */}
-          {todayShift.punchIn && todayShift.punchOut && (
-            <Alert severity="success" className="alert-message">Today's shift has been completed.</Alert>
-          )}
-        </Box>
-      ) : (
-        <Typography variant="body1" className="shift-details">No shifts scheduled for today.</Typography>
-      )}
+        {/* Display Shift Details for today */}
+        {todayShift ? (
+            <Box className="shift-details">
+              <Typography variant="h6">Shift Details</Typography>
+              <Typography variant="body1">Shift Name: {todayShift.shiftName}</Typography>
+              <Typography variant="body1">Start Time: {new Date(todayShift.startTime).toLocaleString()}</Typography>
+              <Typography variant="body1">End Time: {new Date(todayShift.endTime).toLocaleString()}</Typography>
+              {/* Show message if the shift is complete */}
+              {todayShift.punchIn && todayShift.punchOut && (
+                  <Alert severity="success" className="alert-message">Today's shift has been completed.</Alert>
+              )}
+            </Box>
+        ) : (
+            <Typography variant="body1" fontSize= "2rem" className="shift-details">No shifts scheduled for today.</Typography>
+        )}
 
-      {/* Punch in and Punch out buttons */}
-      {todayShift && !todayShift.punchOut && (
-        <Box className="button-container">
-          {/* Punch In button: disabled if conditions are not met */}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handlePunchIn}
-            disabled={punchStatus === 'Punched In' || previousShiftUnpunchedOut || tooEarlyToPunchIn || shiftAlreadyEnded}
-          >
-            Punch In
-          </Button>
-          {/* Punch Out button: disabled if grace period expired */}
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handlePunchOut}
-            disabled={punchStatus === 'Punched Out' || punchStatus === null || gracePeriodExpired}
-          >
-            Punch Out
-          </Button>
-        </Box>
-      )}
+        {/* Punch in and Punch out buttons */}
+        {todayShift && !todayShift.punchOut && (
+            <Box className="button-container">
+              {/* Punch In button: disabled if conditions are not met */}
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handlePunchIn}
+                  disabled={punchStatus === 'Punched In' || previousShiftUnpunchedOut || tooEarlyToPunchIn || shiftAlreadyEnded}
+              >
+                Punch In
+              </Button>
+              {/* Punch Out button: disabled if grace period expired */}
+              <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handlePunchOut}
+                  disabled={punchStatus === 'Punched Out' || punchStatus === null || gracePeriodExpired}
+              >
+                Punch Out
+              </Button>
+            </Box>
+        )}
 
-      {/* Warnings for different scenarios */}
-      {previousShiftUnpunchedOut && (
-        <Alert severity="warning" className="alert-message">
-          You cannot punch in for today's shift until you punch out from your previous shift.
-        </Alert>
-      )}
+        {/* Warnings for different scenarios */}
+        {previousShiftUnpunchedOut && (
+            <Alert severity="warning" className="alert-message">
+              You cannot punch in for today's shift until you punch out from your previous shift.
+            </Alert>
+        )}
 
-      {tooEarlyToPunchIn && (
-        <Alert severity="warning" className="alert-message">
-          You cannot punch in yet. Please wait until closer to your shift start time.
-        </Alert>
-      )}
+        {tooEarlyToPunchIn && (
+            <Alert severity="warning" className="alert-message">
+              You cannot punch in yet. Please wait until closer to your shift start time.
+            </Alert>
+        )}
 
-      {shiftAlreadyEnded && (
-        <Alert severity="warning" className="alert-message">
-          You cannot punch in as the shift has already ended.
-        </Alert>
-      )}
+        {shiftAlreadyEnded && (
+            <Alert severity="warning" className="alert-message">
+              You cannot punch in as the shift has already ended.
+            </Alert>
+        )}
 
-      {gracePeriodExpired && (
-        <Alert severity="warning" className="alert-message">
-          You cannot punch out as the grace period has expired. Please contact your supervisor.
-        </Alert>
-      )}
+        {gracePeriodExpired && (
+            <Alert severity="warning" className="alert-message">
+              You cannot punch out as the grace period has expired. Please contact your supervisor.
+            </Alert>
+        )}
 
-      {error && (
-        <Alert severity="error" className="alert-message">{error}</Alert>
-      )}
-    </Box>
+        {error && (
+            <Alert severity="error" className="alert-message">{error}</Alert>
+        )}
+      </Box>
   );
 };
 
